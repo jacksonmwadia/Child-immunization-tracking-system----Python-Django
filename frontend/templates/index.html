@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Home {% endblock title %}
+
+{% block body %}
+
+
+			
+			<!-- Home Banner -->
+			<section class="section section-search">
+				<div class="container-fluid">
+					<div class="banner-wrapper">
+						<div class="banner-header text-center">
+							<h1>Child Immunization Tracking System</h1>
+							<p>You will never lose track of your child's immunization records or forget about your child's next clinic visit, We got you.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- /Home Banner -->
+			  
+			<!-- Clinic and Specialities -->
+			<section class="section section-specialities">
+				<div class="container-fluid">
+					<div class="section-header text-center">
+						<h2>List of Child Vaccines From Birth to 9 Months</h2>
+						<p class="sub-title">The following are the common vaccines recommmended by the Ministry Of Health</p>
+					</div>
+					<div class="row justify-content-center">
+						<div class="col-md-9">
+							<!-- Slider -->
+							<div class="specialities-slider slider">
+							
+							{% for vaccine in vaccines %}
+							
+
+								<!-- Slider Item -->
+								<div class="speicality-item text-center">
+									<div class="speicality-img">
+										{% if vaccine.picture_thumbnail %}
+											<img src="{{ vaccine.picture_thumbnail.url }}" class="img-fluid" alt="Speciality">
+										{% else %}
+											<img src="{% static 'assets/img/vaccines/bcg.jpg' %}" class="img-fluid" alt="Speciality">
+										{% endif %}
+										<span><i class="fa fa-circle" aria-hidden="true"></i></span>
+									</div>
+									<p>{{vaccine.name}}</p>
+								</div>	
+								<!-- /Slider Item -->
+								
+
+
+							{% endfor %}
+								
+							</div>
+							<!-- /Slider -->
+							
+						</div>
+					</div>
+				</div>   
+			</section>	 
+			<!-- Clinic and Specialities -->
+		  
+			<!-- Popular Section -->
+			
+		   
+		   <!-- Availabe Features -->
+		   <section class="section section-features">
+				<div class="container-fluid">
+				   <div class="row">
+						<div class="col-md-5 features-img">
+							<img src="{% static 'assets/img/features/home1.jpg' %}" class="img-fluid" alt="Feature">
+						</div>
+						<div class="col-md-7">
+							<div class="section-header">	
+								<h2 class="mt-2">Availabe Features in the System</h2>
+								<p>The features listed are available for children undergoing immunization in the hospitals using the system. </p>
+							</div>	
+							<div class="features-slider slider">
+								<!-- Slider Item -->
+								<div class="feature-item text-center">
+									<img src="{% static 'assets/img/features/feature1.jpg' %}" class="img-fluid" alt="Feature">
+									<p>Online Immunization Form</p>
+								</div>
+								<!-- /Slider Item -->
+								<!-- Slider Item -->
+								<div class="feature-item text-center">
+									<img src="{% static 'assets/img/features/sms.png' %}" class="img-fluid" alt="Feature">
+									<p>SMS Reminder</p>
+								</div>
+								<!-- /Slider Item -->
+								
+								<!-- Slider Item -->
+								<div class="feature-item text-center">
+									<img src="{% static 'assets/img/features/analytics2.png' %}" class="img-fluid" alt="Feature">
+									<p>Analytics</p>
+								</div>
+								<!-- /Slider Item -->
+								
+								<!-- Slider Item -->
+								<div class="feature-item text-center">
+									<img src="{% static 'assets/img/features/feature3.jpg' %}" class="img-fluid" alt="Feature">
+									<p>Email Reminder</p>
+								</div>
+								<!-- /Slider Item -->
+								<!-- Slider Item -->
+								<div class="feature-item text-center">
+									<img src="{% static 'assets/img/features/growth.png' %}" class="img-fluid" alt="Feature">
+									<p>Growth Monitoring</p>
+								</div>
+								<!-- /Slider Item -->
+								
+							</div>
+						</div>
+				   </div>
+				</div>
+			</section>		
+			<!-- Availabe Features -->
+			
+    
+{% endblock body %}
+    

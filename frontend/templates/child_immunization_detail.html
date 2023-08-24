@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titile %} {{ immunization.vaccine.name }} {% endblock titile %}
+
+{% block body %}
+
+
+			
+			<!-- Breadcrumb -->
+			<div class="breadcrumb-bar">
+				<div class="container-fluid">
+					<div class="row align-items-center">
+						<div class="col-md-12 col-12">
+							<nav aria-label="breadcrumb" class="page-breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{% url 'core:index' %}">Vaccine</a></li>
+									<li class="breadcrumb-item active" aria-current="page">{{ immunization.vaccine.name }}</li>
+								</ol>
+							</nav>
+							<h2 class="breadcrumb-title">{{ immunization.vaccine.name }}</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /Breadcrumb -->
+			
+			<!-- Page Content -->
+			<div class="content">
+				<div class="container-fluid">
+
+					<form action="" method="POST">{% csrf_token %}
+
+						<div class="row">
+							<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+							
+								<!-- Profile Sidebar -->
+								{% if request.user.is_doctor %}
+                                    {% include 'partials/doctor_profile_sidebar.html' %}
+                                {% elif request.user.is_parent  %}
+                                    {% include 'partials/parent-profile-sidebar.html' %}
+                                {% elif request.user.is_ministry %}
+                                    {% include 'partials/doctor_profile_sidebar.html' %}
+                                {% endif %}
+								<!-- /Profile Sidebar -->
+								
+							</div>
+							<form action="{% url 'core:child-immunization-detail' immunization.uuid %}" method="POST">{% csrf_token %}
+								<div class="col-md-7 col-lg-8 col-xl-9">
+							
+									<!-- Basic Information -->
+									<div class="card">
+										<div class="card-body">
+											<h4 class="card-title">{{ immunization.vaccine.name }} Details</h4>
+											<div class="row form-row">
+												
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Height <span class="text-danger">*</span></label>
+														{{ form.weight }}
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Weight <span class="text-danger">*</span></label>
+														{{ form.weight }}
+													</div>
+												</div>
+												
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Comment</label>
+														{{ form.comment }}
+													</div>
+												</div>
+
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Date Given</label>
+														{{ form.date_given }}
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Vaccinated</label>
+														{{ form.is_vaccinated }}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									<div class="submit-section submit-btn-bottom">
+										<button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+									</div>
+									
+								</div>
+							</form>
+						</div>
+
+					</form>
+
+				</div>
+
+			</div>		
+			<!-- /Page Content -->
+   
+		
+
+{% endblock body %}

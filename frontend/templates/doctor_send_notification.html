@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Appointments {% endblock title %}
+
+
+{% block body %}
+
+
+			
+			<!-- Breadcrumb -->
+			<div class="breadcrumb-bar">
+				<div class="container-fluid">
+					<div class="row align-items-center">
+						<div class="col-md-12 col-12">
+							<nav aria-label="breadcrumb" class="page-breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="{% url 'core:index' %}">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Notifications</li>
+								</ol>
+							</nav>
+							<h2 class="breadcrumb-title">Notifications</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /Breadcrumb -->
+			
+			<!-- Page Content -->
+			<div class="content">
+				<div class="container-fluid">
+
+					<div class="row">
+						<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+							
+							<!-- Profile Sidebar -->
+							{% include 'partials/doctor_profile_sidebar.html' %}
+							<!-- /Profile Sidebar -->
+							
+						</div>
+						
+						<div class="col-md-7 col-lg-8 col-xl-9">
+
+							
+							
+							<div class="row">
+								<div class="col-md-12">
+									<h4 class="mb-4">Notifications</h4>
+									<div class="appointment-tab">
+										
+										<div class="tab-content">
+										
+											<!-- Upcoming Appointment Tab -->
+											<div class="chat-cont-right">
+												<div class="chat-header">
+													<a id="back_user_list" href="javascript:void(0)" class="back-user-list">
+														<i class="material-icons">chevron_left</i>
+													</a>
+													<div class="media">
+														<div class="media-img-wrap">
+															<div class="avatar avatar-online">
+																<img src="{% static 'assets/img/doctors/doctor-thumb-02.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
+															</div>
+														</div>
+														<div class="media-body">
+															<div class="user-name">Dr. Darren Elder</div>
+															<div class="user-status">online</div>
+														</div>
+													</div>
+												</div>
+												<div class="chat-body">
+													<div class="chat-scroll">
+														<ul class="list-unstyled">
+															
+															<li class="media received">
+																<div class="avatar">
+																	<img src="{% static 'assets/img/doctors/doctor-thumb-02.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
+																</div>
+																<div class="media-body">
+																	<div class="msg-box">
+																		<div>
+																			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
+																			<ul class="chat-msg-info">
+																				<li>
+																					<div class="chat-time">
+																						<span>10:17 AM</span>
+																					</div>
+																				</li>
+																				<li><a href="#">Edit</a></li>
+																			</ul>
+																		</div>
+																	</div>
+																</div>
+															</li>
+															
+														</ul>
+													</div>
+												</div>
+												<div class="chat-footer">
+													<form action="{% url 'core:doctor-send-notification' %}" method="POST">{% csrf_token %}
+														<div class="input-group">
+
+															<textarea class="form-control" name="message" id="" cols="30" rows="10"></textarea>
+															<button type="submit" class="btn msg-send-btn"><i class="fab fa-telegram-plane"></i></button>
+														</div>
+													</form>
+												</div>
+											</div>
+											<!-- /Upcoming Appointment Tab -->
+											
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+
+			</div>		
+			<!-- /Page Content -->
+   
+
+		
+
+{% endblock body %}

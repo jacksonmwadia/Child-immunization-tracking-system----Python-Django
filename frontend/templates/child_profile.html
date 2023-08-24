@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    Child
+{% endblock title %}
+    
+{% block body %}
+
+
+			
+			<!-- Breadcrumb -->
+			<div class="breadcrumb-bar">
+				<div class="container-fluid">
+					<div class="row align-items-center">
+						<div class="col-md-12 col-12">
+							<nav aria-label="breadcrumb" class="page-breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="#">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Profile</li>
+								</ol>
+							</nav>
+							<h2 class="breadcrumb-title">Profile</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /Breadcrumb -->
+			
+			<!-- Page Content -->
+			<div class="content">
+				<div class="container-fluid">
+
+					<div class="row">
+						<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar dct-dashbd-lft">
+						
+							<!-- Profile Widget -->
+							<div class="card widget-profile pat-widget-profile">
+								<div class="card-body">
+									<div class="pro-widget-content">
+										<div class="profile-info-widget">
+											<a href="#" class="booking-doc-img">
+												<img src="{{ child.profile_picture_thumbnail.url }}" alt="User Image">
+											</a>
+											<div class="profile-det-info">
+												<h3>{{ child.first_name }} {{ child.last_name }}</h3>
+												
+												<div class="patient-details">
+													<h5><b>Birth ID :</b> {{ child.birth_no }}</h5>
+													<h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> {{ child.resident_county }}</h5>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="patient-info">
+										<ul>
+											<li>Phone <span>{{ child.parent.user.phone_no }}</span></li>
+											<li>Age <span>38 Years, Male</span></li>
+											<li>Blood Group <span>AB+</span></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<!-- /Profile Widget -->
+							
+							<!-- Last Booking -->
+							<div class="card">
+								<div class="card-header">
+									<h4 class="card-title">Parent</h4>
+								</div>
+								<ul class="list-group list-group-flush">
+									<li class="list-group-item">
+										<div class="media align-items-center">
+											<div class="mr-3">
+												<img alt="Image placeholder" src="{{ child.parent.profile_picture_thumbnail.url }}" class="avatar  rounded-circle">
+											</div>
+											<div class="media-body">
+												<h5 class="d-block mb-0">{{ child.parent.user.username }} </h5>
+												<span class="d-block text-sm text-muted">{{ child.parent.user.phone_no }}</span>
+												<span class="d-block text-sm text-muted">14 Nov 2019 5.00 PM</span>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<!-- /Last Booking -->
+							
+						</div>
+
+						<div class="col-md-7 col-lg-8 col-xl-9 dct-appoinment">
+							<div class="card">
+								<div class="card-body pt-0">
+									<div class="user-tabs">
+										<ul class="nav nav-tabs nav-tabs-bottom nav-justified flex-wrap">
+											<li class="nav-item">
+												<a class="nav-link active" href="#pat_appointments" data-toggle="tab">Immunizations</a>
+											</li>
+
+										</ul>
+									</div>
+									<div class="tab-content">
+										
+										<!-- Appointment Tab -->
+										<div id="pat_appointments" class="tab-pane fade show active">
+											
+											<div class="card card-table mb-0">
+												<div class="card-body">
+													<div class="table-responsive">
+														<table class="table table-hover table-center mb-0">
+															<thead>
+																<tr>
+																	<th>Vaccine</th>
+																	<th>Time Given</th>
+																	<th>Appointment Date</th>
+																	<th>Status</th>
+																	
+																	<th></th>
+																</tr>
+															</thead>
+															<tbody>
+																{% for immunization in child_immunizations %}
+
+																<tr>
+																	<td>
+																		<h2 class="table-avatar">
+																			
+																			<a href="{{ immunization.get_absolute_url }}">{{ immunization.vaccine.name }} <span>{{ immunization.vaccine.description }}</span></a>
+																		</h2>
+																	</td>
+																	<td>{{ immunization.vaccine.time_given }} </td>
+																	<td>{{ immunization.immunization_date | date:'d M Y' }}</td>
+																	
+																	{% if immunization.is_vaccinated %}
+																		<td><span class="badge badge-pill bg-success-light">Received</span></td>
+																	{% else %}
+																		<td><span class="badge badge-pill bg-danger-light">Not yet</span></td>
+																	{% endif %}
+																	
+																	<td class="text-right">
+																		<div class="table-action">
+																			<a href="{{ immunization.get_absolute_url }}" class="btn btn-sm bg-success-light">
+																				<i class="far fa-edit"></i> Edit
+																			</a>
+																		</div>
+																	</td>
+																</tr>
+
+																{% endfor %}
+																
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+											<div class="text-right">
+												<a href="add-prescription.html" class="add-new-btn">New</a>
+											</div>
+										</div>
+										<!-- /Appointment Tab -->
+											
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>		
+			<!-- /Page Content -->
+   
+
+{% endblock body %}

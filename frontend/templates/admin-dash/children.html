@@ -1,0 +1,78 @@
+{% extends 'admin-dash/base.html' %}
+{% load static %}
+
+{% block title %} Children Records {% endblock title %}
+
+{% block body %}
+
+
+			
+			<!-- Page Wrapper -->
+            <div class="page-wrapper">
+                <div class="content container-fluid">
+				
+					<!-- Page Header -->
+					<div class="page-header">
+						<div class="row">
+							<div class="col-sm-12">
+								<h3 class="page-title">List of Child Records</h3>
+								<ul class="breadcrumb">
+									<li class="breadcrumb-item"><a href="{% url 'custom-admin:index' %}">Dashboard</a></li>
+									<li class="breadcrumb-item"><a href="javascript:(0);">Users</a></li>
+									<li class="breadcrumb-item active">Child Records</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /Page Header -->
+					
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="table-responsive">
+										<div class="table-responsive">
+										<table class="datatable table table-hover table-center mb-0">
+											<thead>
+												<tr>
+													<th>Child's ID</th>
+													<th>Child's Name</th>
+													<th>Age</th>
+													<th>Address</th>
+													<th>Parent Phone</th>
+												</tr>
+											</thead>
+											<tbody>
+											
+                                                {% for child in children %}
+                                                
+                                                    <tr>
+                                                        <td>#{{child.child_id}}</td>
+                                                        <td>
+                                                            <h2 class="table-avatar">
+                                                               
+                                                                <a href="{{child.get_absolute_url}}">{{child.first_name}} {{child.last_name}} </a>
+                                                            </h2>
+                                                        </td>
+                                                        <td>{{ child.get_child_age }} month</td>
+                                                        <td>{{ child.resident_county }}</td>
+                                                        <td>{{ child.parent.user.phone_no }}</td>
+                                                    </tr>
+                                                
+                                                {% endfor %}
+												
+											</tbody>
+										</table>
+									</div>
+									</div>
+								</div>
+							</div>
+						</div>			
+					</div>
+					
+				</div>			
+			</div>
+			<!-- /Page Wrapper -->
+		
+
+{% endblock body %}

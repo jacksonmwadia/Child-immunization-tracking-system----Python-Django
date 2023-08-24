@@ -1,0 +1,176 @@
+{% extends 'admin-dash/base.html' %}
+{% load static %}
+
+{% block title %} Parents  {% endblock title %}  
+
+{% block body %}
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+    
+        <!-- Page Header -->
+        <div class="page-header">
+                <div class="row">
+                    <div class="col-sm-7 col-auto">
+                        <h3 class="page-title">Hospital</h3>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'custom-admin:hospitals' %}">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Hospital</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-5 col">
+                        <a href="#Add_Hospital" data-toggle="modal" class="btn btn-primary float-right mt-2">Add</a>
+                    </div>
+                </div>
+        </div>
+        <!-- /Page Header -->
+        
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div class="table-responsive">
+                            <table class="datatable table table-hover table-center mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Hospital ID</th>
+                                        <th>Hospital Name</th>
+                                        <th>County</th>
+                                        <th>Address</th>
+                                        <th>Phone</th>
+                                        <th class="text-right">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+
+                                    {% for hospital in hospitals %}
+                                    
+                                    <tr>
+                                        <td>#{{ hospital.id }}</td>
+                                        <td>
+                                            <h2 class="table-avatar">
+                                                
+                                                <a href="{{ hospital.get_absolute_url }}">{{ hospital.name }} </a>
+                                            </h2>
+                                        </td>
+                                        <td>{{ hospital.county.name }}</td>
+                                        <td>{{ hospital.address }}</td>
+                                        <td>{{hospital.phone_no}}</td>
+                                        <td class="text-right">
+                                            <div class="actions">
+                                                <a class="btn btn-sm bg-success-light" href="">
+                                                    <i class="fe fe-pencil"></i> View
+                                                </a>
+                                                <a  data-toggle="modal" href="#delete_modal_{{ hospital.uuid }}" class="btn btn-sm bg-danger-light">
+                                                    <i class="fe fe-trash"></i> Delete
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    
+                                    {% endfor %}
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>			
+        </div>
+        
+    </div>			
+</div>
+
+<!-- Add Modal -->
+<div class="modal fade" id="Add_Hospital" aria-hidden="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Hospial</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'custom-admin:hospitals' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="row form-row">
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Hospital</label>
+                                {{ form.name }}
+                                <small><span class='text-danger'>{{ form.name.errors }}</span></small>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Licence Number</label>
+                                {{ form.license_no }}
+                                <small><span class='text-danger'>{{ form.license_no.errors }}</span></small>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>County</label>
+                                {{ form.county }}
+                                <small><span class='text-danger'>{{ form.county.errors }}</span></small>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Mobile No</label>
+                                {{ form.phone_no }}
+                                <small><span class='text-danger'>{{ form.phone_no.errors }}</span></small>
+                                
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-12">
+                            <div class="form-group">
+                                <label>Adress</label>
+                                {{ form.address }}
+                                <small><span class='text-danger'>{{ form.address.errors }}</span></small>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-12">
+                            <div class="form-group">
+                                <label>Image</label>
+                                {{ form.image }}
+                                <small><span class='text-danger'>{{ form.image.errors }}</span></small>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /ADD Modal -->
+
+
+<!-- Delete Modal -->
+{% for hospital in hospitals %}
+    <div class="text-center modal fade" id="delete_modal_{{ hospital.uuid }}" aria-hidden="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document" >
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="form-content p-2">
+                        <h4 class="modal-title">Delete</h4>
+                        <p class="mb-4">Are you sure want to delete?</p>
+                        <a href="{% url 'custom-admin:hospital-delete' hospital.uuid %}"><button type="button" class="btn btn-primary">Confirm </button></a>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+<!-- /Delete Modal -->
+
+{% endblock body %}

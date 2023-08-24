@@ -1,0 +1,166 @@
+{% extends 'admin-dash/base.html' %}
+{% load static %}
+{% block title %}{{ vaccine.name }}{% endblock title %}
+
+{% block body %}
+			
+			<!-- Page Wrapper -->
+            <div class="page-wrapper">
+                <div class="content container-fluid">
+					
+					<!-- Page Header -->
+					<div class="page-header">
+						<div class="row">
+							<div class="col">
+								<h3 class="page-title">Vaccines</h3>
+								<ul class="breadcrumb">
+									<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                                    <li class="breadcrumb-item"><a href="{% url 'custom-admin:vaccines' %}">Vaccines</a></li>
+									<li class="breadcrumb-item active">{{vaccine.name}}</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /Page Header -->
+					
+					<div class="row">
+						<div class="col-md-12">
+							
+							<div class="tab-content profile-tab-cont">
+								
+								<!-- Personal Details Tab -->
+								<div class="tab-pane fade show active" id="per_details_tab">
+								
+									<!-- Personal Details -->
+									<div class="row">
+										<div class="col-lg-12">
+											<div class="card">
+												<div class="card-body">
+													<h5 class="card-title d-flex justify-content-between">
+														<span>{{vaccine.name}} Details</span> 
+														<a class="edit-link" data-toggle="modal" href="#edit_vaccine_details"><i class="fa fa-edit mr-1"></i>Edit</a>
+													</h5>
+													<div class="row">
+														<p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Name</p>
+														<p class="col-sm-10">{{ vaccine.name }}</p>
+													</div>
+													<div class="row">
+														<p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Description</p>
+														<p class="col-sm-10">{{ vaccine.description }}</p>
+													</div>
+													<div class="row">
+														<p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Time Given</p>
+														<p class="col-sm-10">{{ vaccine.time_given }}</p>
+													</div>
+													<div class="row">
+														<p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Order</p>
+														<p class="col-sm-10">{{ vaccine.order }}</p>
+													</div>
+													
+												</div>
+											</div>
+											
+											<!-- Edit Details Modal -->
+											<div class="modal fade" id="edit_vaccine_details" aria-hidden="true" role="dialog">
+												<div class="modal-dialog modal-dialog-centered" role="document" >
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title">Vaccine Details</h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<form action="{% url 'custom-admin:vaccines-detail' vaccine.pk %}" method='POST'>{% csrf_token %}
+																<div class="row form-row">
+																	<div class="col-12 col-sm-6">
+																		<div class="form-group">
+																			<label>Name</label>
+																			{{ form.name }}
+                                                                            <small><span class="text-danger">{{ form.name.errors }}</span></small>
+																		</div>
+																	</div>
+																	<div class="col-12 col-sm-6">
+																		<div class="form-group">
+																			<label>Time Given</label>
+																			{{ form.time_given }}
+                                                                            <small><span class="text-danger">{{ form.time_given.errors }}</span></small>
+																		</div>
+																	</div>
+																	<div class="col-12">
+																		<div class="form-group">
+																			<label>Description</label>
+																			{{ form.description }}
+                                                                            <small><span class="text-danger">{{ form.description.errors }}</span></small>
+																		</div>
+																	</div>
+																	<div class="col-12 col-sm-6">
+																		<div class="form-group">
+																			<label>Order</label>
+																			{{ form.order }}
+                                                                            <small><span class="text-danger">{{ form.order.errors }}</span></small>
+																		</div>
+																	</div>
+                                                                    
+																</div>
+																<button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+															</form>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- /Edit Details Modal -->
+											
+										</div>
+
+									
+									</div>
+									<!-- /Personal Details -->
+
+								</div>
+								<!-- /Personal Details Tab -->
+								
+								<!-- Change Password Tab -->
+								<div id="password_tab" class="tab-pane fade">
+								
+									<div class="card">
+										<div class="card-body">
+											<h5 class="card-title">Change Password</h5>
+											<div class="row">
+												<div class="col-md-10 col-lg-6">
+													<form>
+														<div class="form-group">
+															<label>Old Password</label>
+															<input type="password" class="form-control">
+														</div>
+														<div class="form-group">
+															<label>New Password</label>
+															<input type="password" class="form-control">
+														</div>
+														<div class="form-group">
+															<label>Confirm Password</label>
+															<input type="password" class="form-control">
+														</div>
+														<button class="btn btn-primary" type="submit">Save Changes</button>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /Change Password Tab -->
+								
+							</div>
+						</div>
+					</div>
+				
+				</div>			
+			</div>
+			<!-- /Page Wrapper -->
+		
+        </div>
+		<!-- /Main Wrapper -->
+		
+
+
+{% endblock body %}

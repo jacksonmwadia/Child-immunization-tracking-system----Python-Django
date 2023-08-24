@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Children {% endblock title %}
+
+
+{% block body %}
+
+
+			
+			<!-- Breadcrumb -->
+			<div class="breadcrumb-bar">
+				<div class="container-fluid">
+					<div class="row align-items-center">
+						<div class="col-md-12 col-12">
+							<nav aria-label="breadcrumb" class="page-breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Children</li>
+								</ol>
+							</nav>
+							<h2 class="breadcrumb-title">Children</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /Breadcrumb -->
+			
+			<!-- Page Content -->
+			<div class="content">
+				<div class="container-fluid">
+
+					<div class="row">
+						<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+							
+							<!-- Profile Sidebar -->
+							{% include 'partials/doctor_profile_sidebar.html' %}
+							<!-- /Profile Sidebar -->
+							
+						</div>
+						
+						<div class="col-md-7 col-lg-8 col-xl-9">
+
+							
+							
+							<div class="row">
+								<div class="col-md-12">
+									<h4 class="mb-4">Children Records</h4>
+									<div class="appointment-tab">
+										<div class="text-right">		
+											<a href="{% url 'core:create-child' %}" class="add-new-btn" >Add</a>
+										</div>
+										
+										<div class="tab-content">
+										
+											<!-- Upcoming Appointment Tab -->
+											<div class="tab-pane show active" id="upcoming-appointments">
+												<div class="card card-table mb-0">
+													<div class="card-body">
+														<div class="table-responsive">
+															<table class="table table-hover table-center mb-0">
+																<thead>
+																	<tr>
+																		<th>Child's Name</th>
+																		<th>Date Registerd</th>
+																		<th>Parent</th>
+																		<th>Phone</th>
+																		<th class="text-center">Completed</th>
+																		<th class="text-center">Action</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	{% for child in doctor_children %}
+
+																	<tr>
+																		<td>
+																			<h2 class="table-avatar">
+																				
+																				<a href="{{ child.get_absolute_url }}">{{ child.first_name }} {{ child.last_name }}<span>#{{ child.child_id }}</span></a>
+																			</h2>
+																		</td>
+																		<td>{{ child.created_at | date:'d M Y' }}<span class="d-block text-info">10.00 AM</span></td>
+																		<td>{{ child.parent.user.username }}</td>
+																		<td>{{ child.parent.user.phone_no }}</td>
+																		<td class="text-center">$150</td>
+																		<td class="text-center">
+																			<div class="table-action">
+																				<a href="{{ child.get_absolute_url }}" class="btn btn-sm bg-info-light">
+																					<i class="far fa-eye"></i> View
+																				</a>
+
+																				<a href="{% url 'core:child-delete' child.uuid %}" class="btn btn-sm bg-danger-light">
+																					<i class="fas fa-times"></i> Delete
+																				</a>
+																			</div>
+																		</td>
+																	</tr>
+																	
+																	{% endfor %}
+																	
+																</tbody>
+															</table>		
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- /Upcoming Appointment Tab -->
+											
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+
+			</div>		
+			<!-- /Page Content -->
+   
+
+		
+
+{% endblock body %}

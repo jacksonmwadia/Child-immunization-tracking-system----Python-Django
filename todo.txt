@@ -1,0 +1,20 @@
+Child Records:  Age
+
+Reports
+    -   Completed Vaccinated
+
+
+
+DashBoard
+    - Doctors
+    - Parents
+    - Children Records
+    - Ongoing Vaccinations
+    - Compeleted Vaccinations
+    - Charts
+
+    Notifications
+        - Logic to add next appointment on create
+
+    Search Functionality
+Pagination

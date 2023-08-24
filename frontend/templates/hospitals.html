@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Hospitals {% endblock title %}
+
+{% block body %}
+
+<div class="breadcrumb-bar">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-12 col-12">
+                <nav aria-label="breadcrumb" class="page-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'core:index' %}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Hospitals</li>
+                    </ol>
+                </nav>
+                <h2 class="breadcrumb-title">Hospitals</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row row-grid">
+    
+            
+            {% for client in clients %}
+                <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="profile-widget">
+                        <div class="doc-img">
+                            <a href="doctor-profile.html">
+                                <img class="img-fluid" alt="User Image" src="{% static 'assets/img/doctors/doctor-03.jpg' %}">
+                            </a>
+                            <a href="javascript:void(0)" class="fav-btn">
+                                <i class="far fa-bookmark"></i>
+                            </a>
+                        </div>
+                        <div class="pro-content">
+                            <h3 class="title">
+                                <a href="doctor-profile.html">{{ client.name }}</a> 
+                                <i class="fas fa-check-circle verified"></i>
+                            </h3>
+                            <ul class="available-info">
+                                <li>
+                                    <i class="fas fa-map-marker-alt"></i>{{ client.county.name }}
+                                </li>
+                                <li>
+                                    <i class="far fa-call"></i> {{ client.phone_no }}
+                                </li>
+                                <li>
+                                    <i class="fas fa-map-marker-alt"></i>{{ client.address }} <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
+                                </li>
+                            </ul>
+                           
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+        
+    </div>
+</div>
+
+{% endblock body %}

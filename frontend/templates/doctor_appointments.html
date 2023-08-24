@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Appointments {% endblock title %}
+
+
+{% block body %}
+
+
+			
+			<!-- Breadcrumb -->
+			<div class="breadcrumb-bar">
+				<div class="container-fluid">
+					<div class="row align-items-center">
+						<div class="col-md-12 col-12">
+							<nav aria-label="breadcrumb" class="page-breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="{% url 'core:index' %}">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Appointments</li>
+								</ol>
+							</nav>
+							<h2 class="breadcrumb-title">Appointments</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /Breadcrumb -->
+			
+			<!-- Page Content -->
+			<div class="content">
+				<div class="container-fluid">
+
+					<div class="row">
+						<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+							
+							<!-- Profile Sidebar -->
+							{% include 'partials/doctor_profile_sidebar.html' %}
+							<!-- /Profile Sidebar -->
+							
+						</div>
+						
+						<div class="col-md-7 col-lg-8 col-xl-9">
+
+							
+							
+							<div class="row">
+								<div class="col-md-12">
+									<h4 class="mb-4">Appoinments</h4>
+									<div class="appointment-tab">
+										
+										<div class="tab-content">
+										
+											<!-- Upcoming Appointment Tab -->
+											<div class="tab-pane show active" id="upcoming-appointments">
+												<div class="card card-table mb-0">
+													<div class="card-body">
+														<div class="table-responsive">
+															<table class="table table-hover table-center mb-0">
+																<thead>
+																	<tr>
+																		<th>Patient Name</th>
+																		<th>Appt Date</th>
+																		<th>Parent Phone</th>
+																		<th>Vaccine</th>
+																		<th></th>
+																	</tr>
+																</thead>
+																<tbody>
+																	{% for child in appointments %}
+																	
+																	<tr>
+																		<td>
+																			<h2 class="table-avatar">
+																				
+																				<a href="patient-profile.html">{{child.child.first_name}} {{child.child.last_name}} <span>{{ child.child.child_id }}</span></a>
+																			</h2>
+																		</td>
+																		<td>{{ child.immunization_date | date:'d M Y' }} <span class="d-block text-info">{{ child.immunization_date | time }}</span></td>
+																		<td>{{child.child.parent.phone_no}}</td>
+																		<td>{{ child.vaccine.name }}</td>
+																		<td class="text-right">
+																			<div class="table-action">
+																				<a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+																					<i class="far fa-eye"></i> View
+																				</a>
+																				
+																				<a href="javascript:void(0);" class="btn btn-sm bg-success-light">
+																					<i class="fas fa-check"></i> Accept
+																				</a>
+																				<a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
+																					<i class="fas fa-times"></i> Cancel
+																				</a>
+																			</div>
+																		</td>
+																	</tr>
+																
+																	
+																	{% endfor %}
+																	
+																</tbody>
+															</table>		
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- /Upcoming Appointment Tab -->
+											
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+
+			</div>		
+			<!-- /Page Content -->
+   
+
+		
+
+{% endblock body %}

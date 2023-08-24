@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Create Child
+{% endblock title %}
+
+{% block body %}
+
+
+
+			
+			<!-- Page Content -->
+			<div class="content">
+				<div class="container-fluid">
+
+					<div class="row">
+						<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+						
+							<!-- Profile Sidebar -->
+							{% include 'partials/doctor_profile_sidebar.html' %}
+							<!-- /Profile Sidebar -->
+							
+						</div>
+						<div class="col-md-7 col-lg-8 col-xl-9">
+						
+							<!-- Basic Information -->
+							<form action="{% url 'core:create-child' %}" method="POST">{% csrf_token %}
+
+								<div class="card">
+									<div class="card-body">
+										<h4 class="card-title">Basic Information</h4>
+										<div class="row form-row">
+											
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>First Name <span class="text-danger">*</span></label>
+													{{ form.first_name }}
+													<small><span class="text-danger">{{ form.first_name.errors }}</span></small>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>Last Name <span class="text-danger">*</span></label>
+													{{ form.last_name }}
+													<small><span class="text-danger">{{ form.last_name.errors }}</span></small>
+
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>Birth Number</label>
+													{{ form.birth_no }}
+													<small><span class="text-danger">{{ form.birth_no.errors }}</span></small>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>Gender</label>
+													{{ form.gender }}
+													<small><span class="text-danger">{{ form.gender.errors }}</span></small>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group mb-0">
+													<label>Date of Birth</label>
+													{{ form.date_of_birth }}
+													<small><span class="text-danger">{{ form.date_of_birth.errors }}</span></small>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group mb-0">
+													<label>Parent</label>
+													{{ form.parent }}
+													<small><span class="text-danger">{{ form.parent.errors }}</span></small>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group mb-0">
+													<label>Mother's Name</label>
+													{{ form.mothers_name }}
+													<small><span class="text-danger">{{ form.mothers_name.errors }}</span></small>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group mb-0">
+													<label>Father's Name</label>
+													{{ form.fathers_name }}
+													<small><span class="text-danger">{{ form.fathers_name.errors }}</span></small>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /Basic Information -->
+								
+								<!-- About Me -->
+								<div class="card">
+									<div class="card-body">
+										
+										<h4 class="card-title">More Information</h4>
+										<div class="row form-row">
+											<div class="col-md-6">
+												<div class="form-group mb-0">
+													<label>Registration Date</label>
+													{{ form.date_of_registration }}
+													<small><span class="text-danger">{{ form.date_of_registration.errors }}</span></small>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group mb-0">
+													<label>Birth Facility</label>
+													{{ form.birth_facility 	}}
+													<small><span class="text-danger">{{ form.date_of_registration.errors }}</span></small>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group mb-0">
+													<label>Birth County</label>
+													{{ form.birth_county }}
+													<small><span class="text-danger">{{ form.birth_county.errors }}</span></small>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group mb-0">
+													<label>Resident County</label>
+													{{ form.resident_county }}
+													<small><span class="text-danger">{{ form.resident_county.errors }}</span></small>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group mb-0">
+													<label>Height</label>
+													{{ form.height }}
+													<small><span class="text-danger">{{ form.height.errors }}</span></small>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group mb-0">
+													<label>Weight</label>
+													{{ form.weight }}
+													<small><span class="text-danger">{{ form.weight.errors }}</span></small>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /About Me -->
+								
+								
+								<div class="submit-section submit-btn-bottom">
+									<button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+								</div>	
+
+
+							</form>
+							
+						</div>
+					</div>
+
+				</div>
+
+			</div>		
+			<!-- /Page Content -->
+   
+			
+
+
+{% endblock body %}
+    
